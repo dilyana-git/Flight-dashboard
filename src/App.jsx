@@ -7,7 +7,6 @@ import ApiKeySetup from './components/ApiKeySetup'
 import DestinationDrawer from './components/DestinationDrawer'
 import useFlightSearch from './hooks/useFlightSearch'
 import useLocalStorage from './hooks/useLocalStorage'
-import { AIRLINES } from './data/airlineConfig'
 
 const DEFAULT_FILTERS = {
   month: new Date().getMonth(),
@@ -19,7 +18,7 @@ const DEFAULT_FILTERS = {
 }
 
 export default function App() {
-  const [apiKey, setApiKey] = useLocalStorage('kiwi_api_key', '')
+  const [apiKey, setApiKey] = useLocalStorage('rapidapi_key', '')
   const [demoMode, setDemoMode] = useLocalStorage('demo_mode', false)
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
   const [pendingFilters, setPendingFilters] = useState(DEFAULT_FILTERS)
@@ -117,7 +116,6 @@ export default function App() {
 
       {/* Main content */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Map */}
         <div className="w-[60%] flex-shrink-0 bg-[#1a2235] relative">
           <FlightMap
             flights={sortedFlights}
@@ -126,8 +124,6 @@ export default function App() {
             selectedFlight={selectedFlight}
           />
         </div>
-
-        {/* Results grid */}
         <div className="w-[40%] flex flex-col overflow-hidden border-l border-[#1a2235]">
           <ResultsGrid
             flights={sortedFlights}
@@ -142,7 +138,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* API Key setup modal */}
       {(showApiSetup || needsApiKey) && (
         <ApiKeySetup
           apiKey={apiKey}
@@ -153,7 +148,6 @@ export default function App() {
         />
       )}
 
-      {/* Destination Drawer */}
       {selectedFlight && (
         <DestinationDrawer
           flight={selectedFlight}

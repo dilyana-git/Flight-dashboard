@@ -7,7 +7,7 @@ export default function ApiKeySetup({ apiKey, onSave, onClose, onDemo, required 
   const handleSave = () => {
     const trimmed = value.trim()
     if (!trimmed) {
-      setError('Please enter an API key or use demo mode.')
+      setError('Please enter your RapidAPI key or use demo mode.')
       return
     }
     onSave(trimmed)
@@ -25,24 +25,39 @@ export default function ApiKeySetup({ apiKey, onSave, onClose, onDemo, required 
           </div>
           <div>
             <div className="font-syne font-bold text-[#e2e8f0] text-lg">API Key Setup</div>
-            <div className="text-xs text-[#64748b]">Required for live flight data</div>
+            <div className="text-xs text-[#64748b]">RapidAPI · Sky Scrapper (Skyscanner data)</div>
           </div>
         </div>
 
-        <p className="text-sm text-[#64748b] mb-5 leading-relaxed">
-          Sofia Departures uses the{' '}
-          <span className="text-amber-500 font-semibold">Kiwi Tequila API</span>{' '}
-          for real-time flight data. Register for a free API key at{' '}
-          <span className="font-mono text-[#e2e8f0] text-xs">tequila.kiwi.com/register</span>.
-        </p>
+        {/* Steps */}
+        <ol className="text-sm text-[#64748b] mb-5 space-y-2 leading-relaxed">
+          <li className="flex gap-2">
+            <span className="text-amber-500 font-mono font-bold flex-shrink-0">1.</span>
+            Sign up free at <span className="font-mono text-[#e2e8f0] text-xs">rapidapi.com</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-amber-500 font-mono font-bold flex-shrink-0">2.</span>
+            Search for <span className="font-mono text-[#e2e8f0] text-xs">"Sky Scrapper"</span> and subscribe to the free plan
+          </li>
+          <li className="flex gap-2">
+            <span className="text-amber-500 font-mono font-bold flex-shrink-0">3.</span>
+            Copy your <span className="font-mono text-[#e2e8f0] text-xs">X-RapidAPI-Key</span> from the API console
+          </li>
+        </ol>
+
+        <div className="bg-[#1a2235] border border-[#243047] rounded-lg p-3 mb-5 text-xs text-[#64748b] font-mono">
+          Free tier: <span className="text-amber-500">100 requests / month</span>
+          <span className="mx-2 text-[#243047]">|</span>
+          ~8 searches/month with caching
+        </div>
 
         <div className="space-y-3 mb-5">
-          <div className="text-xs text-[#64748b] font-mono uppercase tracking-wider">Your API Key</div>
+          <div className="text-xs text-[#64748b] font-mono uppercase tracking-wider">Your RapidAPI Key</div>
           <input
             type="text"
             value={value}
             onChange={e => { setValue(e.target.value); setError('') }}
-            placeholder="Paste your Tequila API key here..."
+            placeholder="Paste your X-RapidAPI-Key here..."
             className="w-full bg-[#1a2235] border border-[#243047] rounded-lg px-4 py-3 text-sm text-[#e2e8f0] font-mono placeholder-[#64748b] focus:outline-none focus:border-amber-500 transition-colors"
           />
           {error && <div className="text-xs text-red-400">{error}</div>}
@@ -59,7 +74,7 @@ export default function ApiKeySetup({ apiKey, onSave, onClose, onDemo, required 
             onClick={handleSave}
             className="flex-1 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-[#0a0e17] font-semibold text-sm transition-colors font-sans"
           >
-            Save & Start
+            Save &amp; Start
           </button>
         </div>
 
